@@ -15,11 +15,15 @@
 
 ![demo](assets/demo-preview.gif)
 
-> 完整视频：[assets/demo.mp4](assets/demo.mp4)（含登录、抓题、转写渲染、上传全过程）
+> 完整视频：[assets/demo.mp4](assets/demo.mp4)（含登录、抓题、转写渲染、上传、红笔订正、清理全过程）
 
 | 作业列表 | 校对 | LaTeX 产物 |
 |---|---|---|
 | ![list](assets/screenshot-list.png) | ![proofread](assets/step1-proofread.png) | ![latex](assets/step3-latex.png) |
+
+| 红笔订正 | 上传结果 | 清理 |
+|---|---|---|
+| ![redpen](assets/step5-redpen.png) | ![upload](assets/step4-uploaded.png) | ![clean](assets/step6-clean-done.png) |
 
 ## 流水线
 

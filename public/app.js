@@ -394,8 +394,9 @@ function renderStepPanel() {
   if (activeStep === 1) {
     html += panelCard("手写稿", `
       <div class="callout">把手写解答 PDF 放进来（拍照/扫描件均可）。放好后回<b>第 3 步</b>选择「切片版」或「LaTeX 版」。</div>
-      <div class="btnrow">
-        <label class="btn ghost" style="cursor:pointer">＋ 上传 PDF<input type="file" id="pdf-file" accept=".pdf" style="display:none"></label>
+      <div class="btnrow" style="margin-top:8px">
+        <label class="btn primary" style="cursor:pointer;font-size:15px;padding:9px 22px">📄 上传手写稿 PDF<input type="file" id="pdf-file" accept=".pdf" style="display:none"></label>
+        <span class="hint">或直接把 PDF 复制进作业目录后点「刷新」</span>
       </div>
       <div style="margin-top:10px">
         ${d.pdfs.length ? d.pdfs.map((p, i) => `<label style="display:block;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin:6px 0">
@@ -418,7 +419,7 @@ function renderStepPanel() {
         ${d.texts.bounds ? `<details open><summary class="hint" style="cursor:pointer">边界.json（可改后点「重新切图」）</summary>
           <textarea id="bounds-edit" class="pre" style="width:100%;min-height:160px">${esc(d.texts.bounds)}</textarea>
           <div class="btnrow" style="margin-top:8px">${btn("split-recut", "保存并重新切图", "ok", busy("split"))}</div></details>` : ""}
-        <div style="margin-top:10px">${gallery(listPng(d.sliceDirs[0] || d.slicesDir))}</div>`,
+        <div style="margin-top:10px">${gallery(d.galleries?.slices || [])}</div>`,
         issues.length ? `⚠ 总览复核疑点 ${issues.length} 条：${esc(issues.map((x) => `切片${x.slice}:${x.note}`).join("；"))}` : "");
       if (d.state.overviews?.length)
         html += panelCard("校对总览", gallery(d.state.overviews), "上排看开头（每格必须是题号）、下排看结尾");
@@ -467,13 +468,6 @@ function renderStepPanel() {
   bindStepPanel();
 }
 
-function listPng(dir) {
-  // 详情接口不回图片清单，这里由数量生成占位路径（文件服务按实际存在与否返回）
-  if (!dir) return [];
-  const names = [];
-  for (let i = 1; i <= countN(dir); i++) names.push(dir.replace(/[\\/]+$/, "") + `/第${String(i).padStart(2, "0")}题.png`);
-  return names;
-}
 function countN(dir) {
   if (!dir) return 0;
   const d = detail;
@@ -488,12 +482,9 @@ function countN(dir) {
   if (d.slicesDir && dir === d.slicesDir) return d.counts.slices;
   return 0;
 }
-function latexPngs() {
-  return detail.latexDir ? listPng(detail.latexDir + "/图片") : [];
-}
-function redpenPngs() {
-  return detail.redpenDir ? listPng(detail.redpenDir) : [];
-}
+// 图片清单一律用后端 detail.galleries 里的真实文件（兼容无补零/自定义后缀文件名）
+const latexPngs = () => detail.galleries?.latex || [];
+const redpenPngs = () => detail.galleries?.redpen || [];
 
 /* ---------------- 步骤动作 ---------------- */
 let jobBusyStep = null;

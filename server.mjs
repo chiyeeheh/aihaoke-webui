@@ -24,6 +24,19 @@ const MIME = {
   ".tex": "text/plain; charset=utf-8", ".py": "text/plain; charset=utf-8",
 };
 
+// 列出目录里的「第n题」图片（容忍无补零与自定义后缀），按题号排序，返回绝对路径
+function listArt(dir) {
+  if (!dir || !existsSync(dir)) return [];
+  return readdirSync(dir)
+    .map((f) => {
+      const m = /^第0*(\d+)题.*\.png$/i.exec(f);
+      return m ? { n: +m[1], full: path.join(dir, f) } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.n - b.n)
+    .map((x) => x.full);
+}
+
 const wrap = (fn) => async (req, res) => {
   try {
     await fn(req, res);
@@ -114,6 +127,13 @@ app.get("/api/assignment/detail", wrap((req, res) => {
     sliceDirCounts: Object.fromEntries(
       (state.sliceDirs || (probe.slicesDir ? [probe.slicesDir] : [])).map((s) => [s, countProblems(s).length])
     ),
+    galleries: {
+      haoke: listArt(probe.haokeDir),
+      proofs: listArt(probe.proofsDir),
+      slices: (state.sliceDirs || (probe.slicesDir ? [probe.slicesDir] : [])).flatMap(listArt),
+      latex: listArt(probe.latexDir && path.join(probe.latexDir, "图片")),
+      redpen: listArt(probe.redpenDir),
+    },
   };
   res.json(detail);
 }));
@@ -235,8 +255,11 @@ function stageSlices(cfg, sliceDirs) {
 app.post("/api/steps/upload", wrap((req, res) => {
   const { cfg, dir, probe } = mustProbe(req);
   const state = readState(dir);
-  const sliceDirs = req.body?.sliceDirs || state.sliceDirs || (probe.slicesDir ? [probe.slicesDir] : []);
-  if (!sliceDirs.length) throw new Error("没有切片目录——先完成「手写稿处理」");
+  // 切片目录优先；LaTeX 模式回退到 转换/图片（渲染出的每题 PNG 同样可上传）
+  const sliceDirs = req.body?.sliceDirs || state.sliceDirs
+    || (probe.slicesDir ? [probe.slicesDir] : null)
+    || (probe.latexDir ? [path.join(probe.latexDir, "图片")] : null) || [];
+  if (!sliceDirs.length) throw new Error("没有可上传的图片目录——先完成「手写稿处理」（切片版或 LaTeX 版）");
   const force = !!req.body?.force;
   const job = createJob(dir, "upload", `上传：${probe.name}`, async (ctx) => {
     const { stage, count } = stageSlices(cfg, sliceDirs);

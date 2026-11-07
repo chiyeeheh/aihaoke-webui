@@ -13,17 +13,27 @@
 
 ## 演示
 
-![demo](assets/demo-preview.gif)
+真实作业（线性代数·第八次，4 题）全流程截图：
 
-> 完整视频：[assets/demo.mp4](assets/demo.mp4)（含登录、抓题、转写渲染、上传、红笔订正、清理全过程）
+| 登录 jAccount | 作业列表与进度 |
+|---|---|
+| ![login](assets/stage-login.png) | ![list](assets/screenshot-list.png) |
 
-| 作业列表 | 校对 | LaTeX 产物 |
-|---|---|---|
-| ![list](assets/screenshot-list.png) | ![proofread](assets/step1-proofread.png) | ![latex](assets/step3-latex.png) |
+| ① 抓题·校对 | ② 上传手写稿 |
+|---|---|
+| ![proofread](assets/step1-proofread.png) | ![manuscript](assets/step2-manuscript.png) |
 
-| 红笔订正 | 上传结果 | 清理 |
-|---|---|---|
-| ![redpen](assets/step5-redpen.png) | ![upload](assets/step4-uploaded.png) | ![clean](assets/step6-clean-done.png) |
+| ③ 处理：切片 / LaTeX 重排 | ④ 上传：平台作答页附件就位 |
+|---|---|
+| ![latex](assets/step3-latex.png) | ![upload](assets/stage-upload-platform.png) |
+
+| ④ 上传结果（面板） | ⑤ 红笔订正 |
+|---|---|
+| ![uploaded](assets/step4-uploaded.png) | ![redpen](assets/step5-redpen.png) |
+
+| ⑥ 清理 | 清理完成 |
+|---|---|
+| ![clean](assets/step6-clean.png) | ![clean-done](assets/step6-clean-done.png) |
 
 ## 流水线
 

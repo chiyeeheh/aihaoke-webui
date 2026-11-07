@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>haoke 作业流水线</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><b>haoke</b> 作业流水线</div>
+    <nav>
+      <a href="#/" id="nav-list">作业</a>
+      <a href="#/settings" id="nav-settings">设置</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="keytag" id="keytag"></div>
+  </header>
+  <main class="wrap" id="app"></main>
+
+  <div class="drawer" id="drawer" style="display:none">
+    <div class="head" id="drawer-head">
+      <span class="t" id="drawer-title">作业日志</span>
+      <span class="s" id="drawer-status"></span>
+      <span class="spacer"></span>
+      <span class="s" id="drawer-toggle">收起 ▾</span>
+    </div>
+    <div class="body" id="drawer-body"></div>
+  </div>
+
+  <div id="overlays"></div>
+  <script src="app.js"></script>
+</body>
+</html>

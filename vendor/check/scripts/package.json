@@ -1,0 +1,10 @@
+{
+  "name": "sjtu-hw-check-render",
+  "private": true,
+  "version": "1.0.0",
+  "description": "把红笔订正的 HTML 片段渲染成透明 PNG（MathJax + 无头 Chrome）",
+  "dependencies": {
+    "mathjax": "^3.2.2",
+    "puppeteer-core": "^24.0.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "aihaoke-webui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "haoke 作业流水线本机面板：抓题→校对→切片/LaTeX→上传→订正→清理（AI 步骤走 OpenAI 兼容视觉接口）",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

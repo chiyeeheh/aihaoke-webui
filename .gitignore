@@ -1,0 +1,8 @@
+# 运行期生成，一律不入库
+node_modules/
+config.json
+data/
+.chrome-profile/
+_redpen/
+_bands/
+*.log

@@ -33,7 +33,7 @@ npm start          # 打开 http://127.0.0.1:8420
 
 | 配置 | 说明 |
 |---|---|
-| Base URL | 默认智谱 `https://open.bigmodel.cn/api/paas/v4`，可换任何 OpenAI 兼容服务 |
+| Base URL | 默认 OpenAI `https://api.openai.com/v1`，可换任何 OpenAI 兼容服务（智谱 `https://open.bigmodel.cn/api/paas/v4`、Qwen 等） |
 | API Key | 存本机 `config.json`，不会离开这台机器 |
 | 视觉模型 | 校对/挑行/转写/红笔共用（如 `glm-4.5v`、`qwen-vl-max`、`gpt-4o`） |
 | 作业根目录 | 面板按「课程/第N次作业」两层结构扫描，例如 `D:\课程`，作业放在 `D:\课程\高等数学\第一次作业` |

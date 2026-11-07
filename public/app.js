@@ -257,7 +257,7 @@ async function viewSettings() {
   const s = await api("/api/settings");
   app.innerHTML = `<div class="card">
     <h3>LLM（OpenAI 兼容接口）</h3>
-    <div class="field"><label>Base URL</label><input type="text" id="s-base" value="${esc(s.llm.baseUrl)}" placeholder="https://open.bigmodel.cn/api/paas/v4"></div>
+    <div class="field"><label>Base URL</label><input type="text" id="s-base" value="${esc(s.llm.baseUrl)}" placeholder="https://api.openai.com/v1"></div>
     <div class="field"><label>API Key ${s.hasKey ? '<span class="tag ok">已配置</span>' : '<span class="tag err">未配置</span>'}</label>
       <input type="password" id="s-key" placeholder="${s.hasKey ? "已保存（留空保持不变）" : "sk-…"}"></div>
     <div class="field"><div class="row">
